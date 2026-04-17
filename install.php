@@ -63,6 +63,9 @@ $stmt=$conn->prepare("DROP TABLE IF EXISTS tblreviews;
 CREATE TABLE tblreviews
 (ProductID INT(4) NOT NULL,
 UserID INT(4) NOT NULL,
+Rating INT(1),
+Review VARCHAR(5000),
+Date VARCHAR(10),
 PRIMARY KEY (ProductID, UserID)
 );
 ");
@@ -90,4 +93,30 @@ PRIMARY KEY (BasketID, ProductID)
 ");
 $stmt->execute();
 echo("tblbasketHasItems created<br>");
+
+
+$hashedpassword=password_hash("password",PASSWORD_DEFAULT);
+echo($hashedpassword);
+
+$stmt=$conn->prepare("INSERT INTO tblusers 
+(UserID,Username,Password,PostalAddress,BillingAddress,AccountType)
+VALUES
+(NULL,'Buyer1',:Password,'558-OundleRoad-PE84JQ-UK', '558-OundleRoad-PE84JQ-UK',0),
+(NULL,'Seller1',:Password,'557-OundleRoad-PE84JQ-UK', '557-OundleRoad-PE84JQ-UK',1),
+(NULL,'Buyer2',:Password,'556-OundleRoad-PE84JQ-UK', '556-OundleRoad-PE84JQ-UK',0),
+(NULL,'Seller2',:Password,'555-OundleRoad-PE84JQ-UK', '555-OundleRoad-PE84JQ-UK',1)
+");
+$stmt->bindParam(":Password", $hashedpassword);
+$stmt->execute();
+
+$stmt=$conn->prepare("INSERT INTO tblproducts 
+(ProductID,Description,SellerID,Stock,PRICE)
+VALUES
+(NULL,'Book1',1,10,10.99),
+(NULL,'Book2',2,14,6.55),
+(NULL,'Book3',3,6,9.80),
+(NULL,'Book4',4,3,110.02)
+");
+$stmt->execute();
+
 ?>
