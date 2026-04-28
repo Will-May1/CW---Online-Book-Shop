@@ -24,77 +24,6 @@ AccountType BOOLEAN NOT NULL DEFAULT 0
 $stmt->execute();
 echo("tblusers created<br>");
 
-// create products table
-$stmt=$conn->prepare("DROP TABLE IF EXISTS tblproducts;
-CREATE TABLE tblproducts
-(ProductID INT(4) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-Description VARCHAR(5000),
-SellerID INT(3) NOT NULL,
-Stock INT(4) NOT NULL,
-PRICE DECIMAL(3, 2) NOT NULL
-);
-");
-$stmt->execute();
-echo("tblproducts created<br>");
-
-// create categories table
-$stmt=$conn->prepare("DROP TABLE IF EXISTS tblcategories;
-CREATE TABLE tblcategories
-(CategoryID INT(4) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-Category VARCHAR(25) NOT NULL
-);
-");
-$stmt->execute();
-echo("tblcategories created<br>");
-
-// create ProductHasCategory table
-$stmt=$conn->prepare("DROP TABLE IF EXISTS tblprodHasCat;
-CREATE TABLE tblprodHasCat
-(ProductID INT(4) NOT NULL,
-CategoryID INT(4) NOT NULL,
-PRIMARY KEY (ProductID, CategoryID)
-);
-");
-$stmt->execute();
-echo("tblprodHasCat created<br>");
-
-// create Reviews table
-$stmt=$conn->prepare("DROP TABLE IF EXISTS tblreviews;
-CREATE TABLE tblreviews
-(ProductID INT(4) NOT NULL,
-UserID INT(4) NOT NULL,
-Rating INT(1),
-Review VARCHAR(5000),
-Date VARCHAR(10),
-PRIMARY KEY (ProductID, UserID)
-);
-");
-$stmt->execute();
-echo("tblreviews created<br>");
-
-// create Basket table
-$stmt=$conn->prepare("DROP TABLE IF EXISTS tblbasket;
-CREATE TABLE tblbasket
-(BasketID INT(5) NOT NULL,
-NumofItems INT(2) NOT NULL,
-TotalPrice DECIMAL(5, 2) NOT NULL
-);
-");
-$stmt->execute();
-echo("tblbasket created<br>");
-
-// create BasketHasItems table
-$stmt=$conn->prepare("DROP TABLE IF EXISTS tblbasketHasItems;
-CREATE TABLE tblbasketHasItems
-(BasketID INT(4) NOT NULL,
-ProductID INT(4) NOT NULL,
-PRIMARY KEY (BasketID, ProductID)
-);
-");
-$stmt->execute();
-echo("tblbasketHasItems created<br>");
-
-
 $hashedpassword=password_hash("password",PASSWORD_DEFAULT);
 echo($hashedpassword);
 
@@ -109,8 +38,21 @@ VALUES
 $stmt->bindParam(":Password", $hashedpassword);
 $stmt->execute();
 
+// create products table
+$stmt=$conn->prepare("DROP TABLE IF EXISTS tblproducts;
+CREATE TABLE tblproducts
+(ProductID INT(4) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+ProdDescription VARCHAR(5000),
+SellerID INT(3) NOT NULL,
+Stock INT(4) NOT NULL,
+PRICE DECIMAL(5, 2) NOT NULL
+);
+");
+$stmt->execute();
+echo("tblproducts created<br>");
+
 $stmt=$conn->prepare("INSERT INTO tblproducts 
-(ProductID,Description,SellerID,Stock,PRICE)
+(ProductID,ProdDescription,SellerID,Stock,PRICE)
 VALUES
 (NULL,'Book1',1,10,10.99),
 (NULL,'Book2',2,14,6.55),
@@ -118,5 +60,107 @@ VALUES
 (NULL,'Book4',4,3,110.02)
 ");
 $stmt->execute();
+
+// create categories table
+$stmt=$conn->prepare("DROP TABLE IF EXISTS tblcategories;
+CREATE TABLE tblcategories
+(CategoryID INT(4) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+Category VARCHAR(25) NOT NULL
+);
+");
+$stmt->execute();
+echo("tblcategories created<br>");
+
+$stmt=$conn->prepare("INSERT INTO tblcategories
+(CategoryID, Category)
+VALUES
+(NULL, 'Fantasy'),
+(NULL, 'Sci-Fi'),
+(Null, 'Steampunk'),
+(NULL, 'Romance')
+");
+$stmt->execute();
+
+// create ProductHasCategory table
+$stmt=$conn->prepare("DROP TABLE IF EXISTS tblprodHasCat;
+
+CREATE TABLE tblprodHasCat
+(ProductID INT(4) NOT NULL,
+CategoryID INT(4) NOT NULL,
+PRIMARY KEY (ProductID, CategoryID)
+);
+");
+$stmt->execute();
+echo("tblprodHasCat created<br>");
+
+$stmt=$conn->prepare("INSERT INTO tblprodHasCat
+(ProductID, CategoryID)
+VALUES
+(1, 1),
+(1, 2),
+(1, 4),
+(2, 3),
+(3, 1),
+(3, 4),
+(4, 2)
+");
+$stmt->execute();
+
+// create Reviews table
+$stmt=$conn->prepare("DROP TABLE IF EXISTS tblreviews;
+CREATE TABLE tblreviews
+(ProductID INT(4) NOT NULL,
+UserID INT(4) NOT NULL,
+Rating INT(1),
+Review VARCHAR(5000),
+RevDate VARCHAR(14),
+PRIMARY KEY (ProductID, UserID)
+);
+");
+$stmt->execute();
+echo("tblreviews created<br>");
+
+$stmt=$conn->prepare("INSERT INTO tblreviews
+(ProductID, UserID, Rating, Review, RevDate)
+VALUES
+(1, 1, 5, 'Very good book. Highly reccomend', '12/02/24-12:24'),
+(2, 3, 3, 'It was alright. Would reccomend if on sale', '24/06/25-14:59'),
+(3, 4, 1, 'Awful book, do not buy', '21/04/26-11:25'),
+(4, 2, 4, 'Good book, well written. Good characters with lots of development', '04/11/18-03:09')
+");
+$stmt->execute();
+
+// create Basket table
+$stmt=$conn->prepare("DROP TABLE IF EXISTS tblbasket;
+CREATE TABLE tblbasket
+(BasketID INT(5) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+NumofItems INT(2) NOT NULL,
+TotalPrice DECIMAL(7, 2) NOT NULL,
+userid int(4))
+);
+");
+$stmt->execute();
+echo("tblbasket created<br>");
+
+$stmt=$conn->prepare("INSERT INTO tblbasket
+(BasketID, UserID, CreationDate, Paid, Processed, Dispatched, Delivered, Returned)
+VALUES
+(NULL, 1, 14.99,1),
+(NULL, 7, 1209.55,2),
+(NULL, 4, 465.27,1)
+");
+$stmt->execute();
+
+// create BasketHasItems table
+$stmt=$conn->prepare("DROP TABLE IF EXISTS tblbasketHasItems;
+CREATE TABLE tblbasketHasItems
+(BasketID INT(4) NOT NULL,
+ProductID INT(4) NOT NULL,
+PRIMARY KEY (BasketID, ProductID)
+);
+");
+$stmt->execute();
+echo("tblbasketHasItems created<br>");
+
 
 ?>
