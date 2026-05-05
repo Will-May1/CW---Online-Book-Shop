@@ -49,7 +49,7 @@ PRICE DECIMAL(5, 2) NOT NULL
 );
 ");
 $stmt->execute();
-echo("tblproducts created<br>");
+echo("<br>tblproducts created<br>");
 
 $stmt=$conn->prepare("INSERT INTO tblproducts 
 (ProductID,ProdDescription,SellerID,Stock,PRICE)
@@ -134,9 +134,13 @@ $stmt->execute();
 $stmt=$conn->prepare("DROP TABLE IF EXISTS tblbasket;
 CREATE TABLE tblbasket
 (BasketID INT(5) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-NumofItems INT(2) NOT NULL,
-TotalPrice DECIMAL(7, 2) NOT NULL,
-userid int(4))
+UserID INT(4) NOT NULL,,
+CreationDate VARCHAR(8) NOT NULL,
+Paid BOOLEAN NOT NULL DEFAULT 0,
+Processed BOOLEAN NOT NULL DEFAULT 0,
+Dispatched BOOLEAN NOT NULL DEFAULT 0,
+Delivered BOOLEAN NOT NULL DEFAULT 0,
+Returned BOOLEAN NOT NULL DEFAULT 0
 );
 ");
 $stmt->execute();
@@ -145,9 +149,9 @@ echo("tblbasket created<br>");
 $stmt=$conn->prepare("INSERT INTO tblbasket
 (BasketID, UserID, CreationDate, Paid, Processed, Dispatched, Delivered, Returned)
 VALUES
-(NULL, 1, 14.99,1),
-(NULL, 7, 1209.55,2),
-(NULL, 4, 465.27,1)
+(NULL, 1, '12/12/12',1, 1, 0, 0, 0),
+(NULL, 2, '20/04/12',1, 1, 1, 1, 0),
+(NULL, 3, '21/12/21',0, 0, 0, 0, 0)
 ");
 $stmt->execute();
 
@@ -159,6 +163,7 @@ ProductID INT(4) NOT NULL,
 PRIMARY KEY (BasketID, ProductID)
 );
 ");
+echo("addedtestdata");
 $stmt->execute();
 echo("tblbasketHasItems created<br>");
 
