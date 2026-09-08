@@ -16,8 +16,8 @@ CREATE TABLE tblusers
 (UserID INT(4) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 Username VARCHAR(20) NOT NULL,
 Password  VARCHAR(100) NOT NULL,
-PostalAddress VARCHAR(50) NOT NULL,
-BillingAddress VARCHAR(50) NOT NULL,
+PostalAddress VARCHAR(400) NOT NULL,
+BillingAddress VARCHAR(400) NOT NULL,
 AccountType BOOLEAN NOT NULL DEFAULT 0
 );
 ");
@@ -26,7 +26,6 @@ echo("tblusers created<br>");
 
 $hashedpassword=password_hash("password",PASSWORD_DEFAULT);
 echo($hashedpassword);
-
 $stmt=$conn->prepare("INSERT INTO tblusers 
 (UserID,Username,Password,PostalAddress,BillingAddress,AccountType)
 VALUES
@@ -134,7 +133,7 @@ $stmt->execute();
 $stmt=$conn->prepare("DROP TABLE IF EXISTS tblbasket;
 CREATE TABLE tblbasket
 (BasketID INT(5) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-UserID INT(4) NOT NULL,,
+UserID INT(4) NOT NULL,
 CreationDate VARCHAR(8) NOT NULL,
 Paid BOOLEAN NOT NULL DEFAULT 0,
 Processed BOOLEAN NOT NULL DEFAULT 0,
