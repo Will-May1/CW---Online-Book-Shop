@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 array_map("htmlspecialchars", $_POST); //sanitises inputs so no html can be injected
 include_once("connection.php");//import equivalent!
 
@@ -31,7 +30,7 @@ try{
                 unset($_SESSION['backURL']);
                 header('Location: ' . $backURL);
             }else{
-                header('Location: login.php');
+                header('Location: index.php');
             }
         }
     }
