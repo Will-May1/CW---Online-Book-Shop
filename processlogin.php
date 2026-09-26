@@ -9,7 +9,7 @@ try{
     $stmt->execute(); 
 
     if ($stmt->rowCount() == 0) {
-        echo("Invalid username.");
+        $_SESSION["UserError"]="Username or Password Incorrect";
         header("location: login.php"); 
     }else{
         #check password ok..
@@ -23,14 +23,15 @@ try{
                 $_SESSION["loggedinuser"]=$row["Username"];
                 $_SESSION["admin"]=$row["Role"];
                 if (!isset($_SESSION['backURL'])){
-                    $backURL= "install.php"; //Sets a default destination if no BackURL set (parent dir)
+                    $backURL= "index.php"; //Sets a default destination if no BackURL set (parent dir)
                 }else{
                     $backURL=$_SESSION['backURL'];
                 }
                 unset($_SESSION['backURL']);
                 header('Location: ' . $backURL);
             }else{
-                header('Location: index.php');
+                $_SESSION["UserError"]="Username or Password Incorrect";
+                header('Location: login.php');
             }
         }
     }

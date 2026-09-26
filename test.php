@@ -12,7 +12,7 @@ $books = [
         "title" => "The Last Trail",
         "author" => "J. R. Whitmore",
         "price" => "8.99",
-        "rating" => "4.7",
+        "rating" => "1.7",
         "reviews" => 128,
         "cover" => "images/books/last-trail.jpg"
     ],
@@ -52,12 +52,8 @@ $books = [
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
 
-<head>
-
-    <meta charset="UTF-8">
-
+<head>  
     <meta
         name="viewport"
         content="width=device-width, initial-scale=1.0"
@@ -71,7 +67,7 @@ $books = [
         rel="stylesheet"
     >
 
-    <!-- Bootstrap Icons -->
+    <!--All Bootstrap Icons-->
     <link
         rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
@@ -85,9 +81,7 @@ $books = [
 
     <style>
 
-        /* =====================================================
-           COLOUR PALETTE
-           ===================================================== */
+        /*Colour Palate*/
 
         :root {
             --sage-light: #BEC5AD;
@@ -100,9 +94,7 @@ $books = [
         }
 
 
-        /* =====================================================
-           GENERAL
-           ===================================================== */
+        /*Irrelevant stuff*/
 
         body {
             font-family: "DM Sans", sans-serif;
@@ -131,9 +123,7 @@ $books = [
         }
 
 
-        /* =====================================================
-           TOP NAVIGATION
-           ===================================================== */
+        /*nav bar*/
 
         .main-navbar {
             background-color: var(--dark-green);
@@ -1816,7 +1806,7 @@ $books = [
                 <div class="col-md-6">
 
                     &copy; <?= date("Y") ?>
-                    IndiePages. All rights reserved.
+                    IndiePages&reg;. All rights reserved.
 
                 </div>
 

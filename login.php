@@ -5,6 +5,13 @@
 </head>
 
 <body>
+    <?php
+    session_start();
+    if (isset($_SESSION["UserError"] )) {
+        echo($_SESSION["UserError"]);
+        unset($_SESSION['UserError']);
+    }
+    ?>
     <form action="processlogin.php" method="POST">
         Username:<input type="text" name="username"><br>
         
@@ -12,10 +19,8 @@
         
         <input type="submit" value="Login">
     </form>
-    
-    <form action="index.php" method="post">
+    <form action="processback.php" method="POST">
         <button type="submit" name="returnButton">Back</button>
     </form>
-
 </body>
 </html>
