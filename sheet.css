@@ -1,0 +1,479 @@
+:root {
+  --sage: #BEC5AD;
+  --jade: #BEC5AD;
+  --green: #519872;
+  --forest: #3B5249;
+  --plum: #34252F;
+  --cream: #F7F6EF;
+  --white: #FFFFFF;
+}
+
+body {
+  font-family: "DM Sans", sans-serif;
+  background-color: var(--cream);
+  color: var(--forest);
+}
+
+h1, h2, h3, h4, h5, .brand-heading {
+  font-family: "Playfair Display", serif;
+}
+
+/* Main Navbar Style*/
+.bg-custom-dark {
+  background-color: var(--forest) !important;
+}
+
+.navbar-brand, .brand-heading {
+  color: var(--cream) !important;
+  font-size: 1.55rem;
+  line-height: 1;
+}
+
+.brand-subtext {
+  display: block;
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.55rem;
+  letter-spacing: 2px;
+  margin-top: 5px;
+  color: var(--jade);
+}
+
+.brand-icon {
+  font-size: 2.3rem;
+  color: var(--jade);
+}
+
+.navbar-nav .nav-link {
+  color: var(--jade) !important;
+  margin: 0 8px;
+  font-size: 0.92rem;
+  position: relative;
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link.active {
+  color: var(--white) !important;
+}
+
+.navbar-nav .nav-link.active::after {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  left: 10px;
+  right: 10px;
+  height: 2px;
+  background-color: var(--jade);
+}
+
+.nav-action {
+  color: var(--cream);
+  font-size: 0.82rem;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.nav-action:hover {
+  color: var(--jade);
+}
+
+.nav-action i {
+  font-size: 1.2rem;
+}
+
+
+/*Nav Bar RHS*/
+.search-button {
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 50%;
+  color: var(--white);
+  background: rgba(255,255,255,0.05);
+  cursor: pointer;
+}
+
+.search-button:hover {
+  background-color: var(--green);
+}
+
+.basket-count-badge {
+  background-color: var(--jade);
+  color: var(--forest);
+  font-size: 0.65rem;
+  min-width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  position: absolute;
+  top: -7px;
+  right: -9px;
+}
+
+/*search panel stuff*/
+
+/* Style for the accordian search keyboard assistance button ring thing*/
+.advanced-search:focus,
+.accordion-button:focus {
+    border-color: var(--green) !important;
+    box-shadow: 0 0 0 3px rgba(81, 152, 114, 0.25) !important;
+}
+
+/* Style for the close search button ring thing*/
+.btn-close:focus {
+    box-shadow: 0 0 0 3px rgba(164, 180, 148, 0.4) !important;
+}
+
+
+/* Removes the default blue background and text tint when the button has been pressed*/
+.accordion-item .accordion-button:not(.collapsed) {
+    background-color: transparent !important; /*Removes blue*/
+    color: var(--forest) !important; /*re-colours green*/
+}
+
+
+
+.navbar,
+.bg-custom-dark {
+    position: relative !important;
+}
+
+/* Styles the target container as a floating dropdown display*/
+#searchOffcanvas {
+    position: absolute !important;
+    top: 100% !important; /* Forces it to drop down directly below the navbar's bottom line*/
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    height: auto !important;
+    z-index: 1060 !important; /* Places it above all other items*/
+    
+    /* Design Overrides */
+    background-color: var(--cream) !important;
+    border-bottom: 2px solid var(--jade) !important;
+    box-shadow: 0 15px 30px rgba(52, 37, 47, 0.2) !important;
+}
+
+/* correction for the 'close button' row alignment*/
+.offcanvas-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--cream);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+
+.search-panel {
+  background-color: var(--cream);
+  border: none;
+  border-radius: 0 0 12px 12px;
+  box-shadow: 0 12px 30px rgba(52,37,47,0.2);
+}
+
+.search-input {
+  border: 1px solid var(--jade);
+  border-radius: 7px;
+  padding: 12px 45px 12px 15px;
+  background-color: white;
+}
+
+.search-input:focus {
+  border-color: var(--green);
+  box-shadow: 0 0 0 3px rgba(81,152,114,0.15);
+}
+
+.advanced-search {
+  color: var(--forest);
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.advanced-search:hover {
+  color: var(--green);
+}
+
+.btn-bookshop {
+  background-color: var(--forest);
+  border-color: var(--forest);
+  color: white;
+  border-radius: 30px;
+  padding: 11px 23px;
+}
+
+.btn-bookshop:hover {
+  background-color: var(--green);
+  border-color: var(--green);
+  color: white;
+}
+
+.btn-light-sage {
+  background-color: var(--sage);
+  color: var(--forest);
+  border: none;
+  border-radius: 30px;
+  padding: 12px 24px;
+}
+
+.btn-light-sage:hover {
+  background-color: white;
+  color: var(--forest);
+}
+
+.hero {
+  min-height: 530px;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(59,82,73,0.97) -10%,
+      rgba(59,82,73,0.92) 40%,
+      rgba(59,82,73,0.25) 90%
+    ),
+    url("Book.jpg");
+  display: flex;
+  color: var(--cream);
+  background-repeat: 
+    no-repeat,
+    no-repeat;
+  background-position:
+    center,
+    720px -230px;
+  background-size:
+    1300px 530px,
+    600px 1000px;
+
+}
+
+.hero h1 {
+  font-size: clamp(3rem, 6vw, 5rem);
+  line-height: 1.05;
+}
+
+.hero-subtitle {
+  font-family: "Playfair Display", serif;
+  color: var(--cream);
+  font-size: 1.7rem;
+}
+
+.hero-text {
+  max-width: 570px;
+  color: var(--cream);
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+.features {
+  background-color: var(--sage);
+  padding: 40px 0;
+}
+
+.feature-icon {
+  width: 52px;
+  height: 52px;
+  border: 2px solid var(--green);
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--forest);
+  font-size: 1.4rem;
+  margin-bottom: 15px;
+}
+
+.feature-title {
+  font-family: "Playfair Display", serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.feature-text {
+  font-size: 0.82rem;
+  color: var(--forest);
+  opacity: 0.8;
+}
+
+.section-label {
+  color: var(--green);
+  letter-spacing: 2px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  color: var(--forest);
+}
+
+.section-title::after {
+  content: "";
+  display: block;
+  width: 45px;
+  height: 2px;
+  background-color: var(--green);
+  margin-top: 10px;
+}
+
+.book-card {
+  background: transparent;
+  border: none;
+  height: 100%;
+}
+
+.book-cover-wrapper {
+  background-color: #e8e9df;
+  padding: 8px;
+  border-radius: 5px;
+  aspect-ratio: 3 / 4.3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.book-cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 2px;
+  box-shadow: 0 4px 12px rgba(52,37,47,0.15);
+}
+
+.book-title {
+  font-family: "DM Sans", sans-serif;
+  font-weight: 700;
+  font-size: 0.92rem;
+  color: var(--forest);
+  margin-top: 13px;
+}
+
+.book-author {
+  font-size: 0.78rem;
+  color: #68776f;
+}
+
+.book-rating {
+  font-size: 0.75rem;
+  color: var(--green);
+}
+
+.book-price {
+  font-weight: 700;
+  color: var(--plum);
+  margin-top: 7px;
+}
+
+.add-basket {
+  width: 100%;
+  margin-top: 10px;
+  padding: 8px 12px;
+  border-radius: 30px;
+  border: none;
+  background-color: var(--forest);
+  color: white;
+  font-size: 0.78rem;
+}
+
+.add-basket:hover {
+  background-color: var(--green);
+}
+
+.genres-section {
+  background-color: var(--sage);
+  position: relative;
+  overflow: hidden;
+}
+
+.genre-card {
+  background-color: var(--green);
+  color: white;
+  border-radius: 5px;
+  padding: 25px 12px;
+  text-align: center;
+  transition: 0.2s;
+}
+
+.genre-card:hover {
+  background-color: var(--forest);
+  transform: translateY(-3px);
+}
+
+.genre-card i {
+  display: block;
+  font-size: 1.7rem;
+  margin-bottom: 10px;
+}
+
+.genre-card span {
+  font-size: 0.8rem;
+}
+.author-banner {
+    min-height: 180px;
+    border-radius: 8px;
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(52,37,47,0.15),
+            rgba(59,82,73,0.96)
+        ),
+        url("images/open-book.jpg") left center/cover no-repeat;
+
+    color: white;
+}
+
+.author-banner h2 {
+    font-size: 2rem;
+}
+
+footer {
+    background-color: var(--plum);
+    color: var(--cream);
+}
+
+footer h5 {
+    font-family: "DM Sans", sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+footer a {
+    color: var(--sage);
+}
+
+footer a:hover {
+    color: white;
+}
+
+.footer-brand {
+    font-family: "Playfair Display", serif;
+    font-size: 1.5rem;
+}
+
+.footer-tagline {
+    color: var(--sage);
+    font-size: 0.6rem;
+    letter-spacing: 2px;
+}
+
+.newsletter-input {
+    background-color: transparent;
+    border: 1px solid var(--sage);
+    color: white;
+    border-radius: 5px 0 0 5px;
+}
+
+.newsletter-input::placeholder {
+    color: var(--sage);
+}
+
+.newsletter-button {
+    background-color: var(--sage);
+    color: var(--forest);
+    border: none;
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.2);
+    color: var(--sage);
+    font-size: 0.75rem;
+}

@@ -94,7 +94,7 @@ $books = [
         }
 
 
-        /*Irrelevant stuff*/
+        /*sets all body pieces to DM Sans font & using the colour palette*/
 
         body {
             font-family: "DM Sans", sans-serif;
@@ -102,14 +102,12 @@ $books = [
             color: var(--dark-green);
         }
 
-        h1,
-        h2,
-        h3,
-        h4,
-        h5 {
+        /*Sets all heading pieces & where brand heading is called to the playfair display font*/
+        h1,h2,h3,h4,h5 .brand-heading {
             font-family: "Playfair Display", serif;
         }
 
+        /*removes underlines from links*/
         a {
             text-decoration: none;
         }
