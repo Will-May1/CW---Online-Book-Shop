@@ -90,7 +90,7 @@ try {
 <section class="hero">
     <div class="container mt-5">
         <div class="row mt-4">
-            <div class="col-lg-0">
+            <div class="col-lg-7">
                 <h1>Own Your Story</h1>
                 <div class="hero-subtitle mt-3">Self-publish. Reach readers.<br> Build your audience.</div>
                 <p class="hero-text mt-3">

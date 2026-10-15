@@ -219,6 +219,22 @@ h1, h2, h3, h4, h5, .brand-heading {
 }
 
 /*.hero {
+            min-height: 530px;
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(59,82,73,0.97) 0%,
+                    rgba(59,82,73,0.92) 48%,
+                    rgba(59,82,73,0.25) 100%
+                ),
+                url("") center/cover no-repeat;
+
+            display: flex;
+            align-items: center;
+            color: white;
+        }*/
+
+/*.hero {
 
   background:
     linear-gradient(
@@ -242,50 +258,6 @@ h1, h2, h3, h4, h5, .brand-heading {
     600px 1000px;
 
 }*/
-
-/* Base Styles: Mobile First (Screens smaller than 768px) */
-.hero {
-  background:
-    linear-gradient(
-      90deg,
-      rgba(59,82,73,0.97) -10%,
-      rgba(59,82,73,0.92) 40%,
-      rgba(59,82,73,0.50) 90% /* Slightly darker on mobile for text readability */
-    ),
-    url("Book.jpg");
-  display: flex;
-  flex-direction: column; /* Stack content vertically on small screens */
-  justify-content: center;
-  color: var(--cream);
-  min-height: 400px; /* Shorter height for mobile screens */
-  background-repeat: no-repeat, no-repeat;
-  background-position: center, center; /* Center the image on mobile */
-  background-size: cover, cover; /* Ensure full coverage on mobile */
-}
-
-/* Tablet Screens (768px and up) */
-@media (min-width: 768px) {
-  .hero {
-    flex-direction: row; /* Return to side-by-side layout if needed */
-    min-height: 480px;
-    background-position: center, right center; /* Move book image to the right */
-    background-size: cover, contain; /* Keep the book contained cleanly */
-  }
-}
-
-/* Desktop Screens (1024px and up) */
-@media (min-width: 1024px) {
-  .hero {
-    min-height: 530px;
-    background-position:
-      center,
-      75% center; /* Smoothly position book using responsive percentages */
-    background-size:
-      100% 100%,
-      auto 90%; /* Adapts to your specific background dimensions */
-  }
-}
-  
 
 .hero h1 {
   font-size: clamp(3rem, 6vw, 5rem);
