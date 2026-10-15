@@ -52,6 +52,7 @@ SellerID INT(3) NOT NULL,
 Stock INT(4) NOT NULL,
 sales_past_30_days INT(6),
 sales_today INT(5),
+queue_pointer INT(2),
 PRICE DECIMAL(5, 2) NOT NULL
 );
 ");
@@ -59,12 +60,12 @@ $stmt->execute();
 echo("<br>tblproducts created<br>");
 
 $stmt=$conn->prepare("INSERT INTO tblproducts 
-(ProductID,Title,ProdDescription,Author,Cover,date_posted,Rating,RevCount,SellerID,Stock,sales_past_30_days,sales_today,PRICE)
+(ProductID,Title,ProdDescription,Author,Cover,date_posted,Rating,RevCount,SellerID,Stock,sales_past_30_days,sales_today,queue_pointer,PRICE)
 VALUES
-(NULL,'Book1','the first book','Jane Meyers','Book.jpg','2025/12/29',4.98,128,1,10,50,30,10.99),
-(NULL,'Book2','the second book','Solair','SolairWeavers.jpg','2026/09/10',3.22,96,2,14,245,50,6.55),
-(NULL,'Book3','the third book','Bridget Jones','','2024/03/14',1.02,203,3,6,550,17,9.80),
-(NULL,'Book4','the fourth book','Rack Jagness','','2010/03/14',0.55,141,4,3,7,43,110.02)
+(NULL,'Book1','the first book','Jane Meyers','Book.jpg','2025/12/29',4.98,128,1,10,50,30,0,10.99),
+(NULL,'Book2','the second book','Solair','SolairWeavers.jpg','2026/09/10',3.22,96,2,14,245,50,0,6.55),
+(NULL,'Book3','the third book','Bridget Jones','','2024/03/14',1.02,203,3,6,550,17,0,9.80),
+(NULL,'Book4','the fourth book','Rack Jagness','','2010/03/14',0.55,141,4,3,7,43,0,110.02)
 ");
 $stmt->execute();
 

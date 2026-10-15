@@ -5,12 +5,12 @@ include_once("connection.php");
 
 try {
     $books          = [];
-    $allowedAge     = 12; // Start with books posted up to 12 months (1 year) ago
-    $maxAgeLimit    = 60; // Safeguard limit at 5 years
+    $allowedAge     = 12; //starts with books up to a year ago (12months)
+    $maxAgeLimit    = 60; // Safety net limit at 5 years back.
     
     while (count($books) < 5 && $allowedAge <= $maxAgeLimit) {
-        // 1. Fetch raw product data along with the data queue metrics
-        $query = "SELECT ProductID, Title, Author, Cover, date_posted, Rating, RevCount, PRICE, sales_queue, queue_pointer 
+        // Fetch all data necessary
+        $query = "SELECT Title, Author, Cover, date_posted, Rating, RevCount, PRICE, sales_past_30_days, queue_pointer 
                   FROM tblproducts 
                   WHERE date_posted >= NOW() - INTERVAL ? MONTH";
                   
@@ -21,73 +21,42 @@ try {
         $processedBooks = [];
         
         foreach ($rawProducts as $product) {
-            // 2. Explode your comma-separated string into a clean PHP numerical array
-            $queue = explode(',', $product['sales_queue']);
+            // Changes queue into array by removing commas
+            $queue = explode(',', $product['sales_past_30_days']);
             $pointer = (int)$product['queue_pointer'];
             
             $weeklySalesSum = 0;
             
-            // 3. Loop backwards exactly 7 times from our current pointer slot to sum up the week's sales velocity
-            for ($d = 0; $i < 7; $i++) {
-                // Modulo math keeps our index wraps locked inside your circular queue array constraints (0-29)
-                $targetIndex = ($pointer - $d + 30) % 30;
+            // Take the most recent 7 days starting from the queue pointer
+            for ($i = 0; $i < 7; $i++) {
+                // Keeps index locked within 0-29 (30 day constraints)
+                $targetIndex = ($pointer - $i + 30) % 30;
                 $weeklySalesSum += (int)($queue[$targetIndex] ?? 0);
             }
             
-            // Map the calculated dynamic week total onto a tracking property key for frontend rendering
+            // Map the calculated dynamic week total onto a serperate property for front end tracking
             $product['sales_this_week'] = $weeklySalesSum;
             $processedBooks[] = $product;
         }
         
-        // 4. Sort the compiled results array by the highest weekly calculation total
+        // Sorts books by sales this week
         usort($processedBooks, function($a, $b) {
             return $b['sales_this_week'] <=> $a['sales_this_week'];
         });
         
-        // 5. Slice off the first 5 records to fulfill your layout limit constraint
+        // remve the first 5 records for the page
         $books = array_slice($processedBooks, 0, 5);
         
-        // If there are less than 5 books in the database, loop back 6 more months
+        // If there are less than 5 books available under these contstraints, loop back 6 more months
         if (count($books) < 5) {
             $allowedAge += 6;
         } else {
-            break; // Stop execution loops cleanly if requirements are met
+            break;
         }
     }
 } catch (PDOException $e) {
     die("Query Execution Failure: " . htmlspecialchars($e->getMessage()));
 }
-?>
-
-/*
-try {
-    // 3. Initialize variables for our search fallback logic loop
-    $books          = [];
-    $allowedAge     = 12; // Start with books posted up to 12 months (1 year) ago
-    $maxAgeLimit    = 60; // Safeguard: Stop stretching if it goes back over 5 years (60 months)
-
-    // 4. Loop runs until we find exactly 5 books, or we hit our safeguard limit
-    while (count($books) < 5 && $allowedAge <= $maxAgeLimit) {
-        // This query filters the launch age window dynamically while sorting strictly by recent monthly velocity
-        $query = "SELECT Title,Author,Cover,date_posted,Rating,RevCount,sales_past_30_days,PRICE
-                  FROM tblproducts
-                  WHERE date_posted >= NOW() - INTERVAL ? MONTH 
-                  ORDER BY sales_past_30_days DESC 
-                  LIMIT 5";
-                  
-        $stmt = $conn->prepare($query);
-        $stmt->execute([$allowedAge]);
-        $books = $stmt->fetchAll();
-
-        // If we found less than 5 books matching this era, extend the age criteria by 6 months and try again
-        if (count($books) < 5) {
-            $allowedAge += 6;
-        }
-    }
-} catch (PDOException $e) {
-    die("Query Execution Failure: " . htmlspecialchars($e->getMessage()));
-}
-*/
 ?>
 
 <!DOCTYPE html>
@@ -204,7 +173,8 @@ try {
                     <div class="book-card">
                         <div class="book-cover-wrapper">
                             <img src="<?= htmlspecialchars($book['Cover']) ?>" 
-                                 alt="<?= htmlspecialchars($book['Title']) ?>" class="book-cover">
+                                class="img-thumbnail"
+                                alt="<?= htmlspecialchars($book['Title']) ?>" class="book-cover">
                         </div>
                         <div class="book-title"><?= htmlspecialchars($book['Title']) ?></div>
                         <div class="book-author"><?= htmlspecialchars($book['Author']) ?></div>
